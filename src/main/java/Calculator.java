@@ -1,8 +1,10 @@
 public class Calculator {
-    public static int add(String input) {
+    public int add(String input) {
         if (input.isEmpty())
             return 0;
-
-        return -1;
+        else {
+            int result = Integer.parseInt(input);
+            return result;
+        }
     }
 }
