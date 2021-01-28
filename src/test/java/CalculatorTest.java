@@ -25,4 +25,9 @@ public class CalculatorTest {
     public void shouldTestWhenTwoNumbersAreOnString() {
         Assert.assertEquals(7, calculator.add("2,5"));
     }
+
+    @Test
+    public void shouldTestWhenMultipleStringsAreOnString() {
+        Assert.assertEquals(22, calculator.add("3,7,1,9,2"));
+    }
 }

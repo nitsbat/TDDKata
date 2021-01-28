@@ -3,8 +3,11 @@ public class Calculator {
         if (input.isEmpty())
             return 0;
         else if (input.contains(",")) {
-            String numbers[] = input.split(",");
-            int sum = Integer.parseInt(numbers[0]) + Integer.parseInt(numbers[1]);
+            String[] numbers = input.split(",");
+            int sum = 0;
+            for (String number : numbers) {
+                sum += Integer.parseInt(number);
+            }
             return sum;
         } else {
             return Integer.parseInt(input);
