@@ -8,7 +8,6 @@ import java.util.stream.Collectors;
 public class Calculator {
 
     public int add(String input) {
-
         if (input.isEmpty())
             return 0;
         else {
@@ -21,15 +20,19 @@ public class Calculator {
         try {
             String[] numbers = generateNumbers(input);
             List<Integer> negativeNumbers = areNegativeNumbersPresent(numbers);
-            if (negativeNumbers.size() > 0) {
-                String message = negativeNumbers.stream().map(Object::toString).collect(Collectors.joining(","));
-                throw new RuntimeException("Negatives Not Allowed : " + message);
-            }
+            checkForNegativeNumbers(negativeNumbers);
             sum = getSumOfNumbers(numbers);
         } catch (Exception exception) {
             throw exception;
         }
         return sum;
+    }
+
+    private void checkForNegativeNumbers(List<Integer> negativeNumbers) {
+        if (negativeNumbers.size() > 0) {
+            String message = negativeNumbers.stream().map(Object::toString).collect(Collectors.joining(","));
+            throw new RuntimeException("Negatives Not Allowed : " + message);
+        }
     }
 
     private List<Integer> areNegativeNumbersPresent(String[] numbers) {
@@ -44,9 +47,16 @@ public class Calculator {
     private int getSumOfNumbers(String[] numbers) {
         int sum = 0;
         for (String number : numbers) {
-            sum += Integer.parseInt(number);
+            int numberInteger = Integer.parseInt(number);
+            if (isGreaterThanThousand(numberInteger)) {
+                sum += numberInteger;
+            }
         }
         return sum;
+    }
+
+    private boolean isGreaterThanThousand(int numberInteger) {
+        return numberInteger <= 1000;
     }
 
     private String[] generateNumbers(String input) {

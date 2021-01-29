@@ -59,4 +59,19 @@ public class CalculatorTest {
             Assert.assertEquals("Negatives Not Allowed : -1,-2", ex.getMessage());
         }
     }
+
+    @Test
+    public void shouldThrowExceptionOnNegativeWithDiffDelimiters() {
+        try {
+            calculator.add("1\n2,-3");
+        } catch (Exception ex) {
+            Assert.assertEquals("Negatives Not Allowed : -3", ex.getMessage());
+        }
+    }
+
+    @Test
+    public void shouldNotConsiderNumberMoreThan1000() {
+        Assert.assertEquals(3, calculator.add("1\n2,1002"));
+
+    }
 }
