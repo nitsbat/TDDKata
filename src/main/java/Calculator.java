@@ -1,5 +1,9 @@
+import java.rmi.server.ObjID;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import java.util.stream.Collectors;
 
 public class Calculator {
 
@@ -16,8 +20,11 @@ public class Calculator {
         int sum;
         try {
             String[] numbers = generateNumbers(input);
-            if (areNegativeNumbersPresent(numbers))
-                throw new RuntimeException("Negatives Not Allowed");
+            List<Integer> negativeNumbers = areNegativeNumbersPresent(numbers);
+            if (negativeNumbers.size() > 0) {
+                String message = negativeNumbers.stream().map(Object::toString).collect(Collectors.joining(","));
+                throw new RuntimeException("Negatives Not Allowed : " + message);
+            }
             sum = getSumOfNumbers(numbers);
         } catch (Exception exception) {
             throw exception;
@@ -25,13 +32,13 @@ public class Calculator {
         return sum;
     }
 
-    private boolean areNegativeNumbersPresent(String[] numbers) {
-
+    private List<Integer> areNegativeNumbersPresent(String[] numbers) {
+        List<Integer> integerList = new ArrayList<>();
         for (String number : numbers) {
             if (Integer.parseInt(number) < 0)
-                return true;
+                integerList.add(Integer.parseInt(number));
         }
-        return false;
+        return integerList;
     }
 
     private int getSumOfNumbers(String[] numbers) {
