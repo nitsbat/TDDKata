@@ -72,7 +72,7 @@ public class Calculator {
     }
 
     private String[] getNumbersSeparatedByRegexDelimiter(String input) {
-        Matcher matcher = Pattern.compile("//(.)\n(.*)").matcher(input);
+        Matcher matcher = Pattern.compile("//(.*)\n(.*)").matcher(input);
         matcher.matches();
         String delimiter = matcher.group(1);
         String str = matcher.group(2);

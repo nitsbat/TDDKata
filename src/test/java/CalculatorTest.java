@@ -74,4 +74,14 @@ public class CalculatorTest {
         Assert.assertEquals(3, calculator.add("1\n2,1002"));
 
     }
+
+    @Test
+    public void shouldAcceptDifferentDelimitersOfLengthTwo() {
+        Assert.assertEquals(3, calculator.add("//~~\n1~~2"));
+    }
+
+    @Test
+    public void shouldAcceptDifferentDelimitersOfInfiniteLength() {
+        Assert.assertEquals(3, calculator.add("//;;;;\n1;;;;2"));
+    }
 }
