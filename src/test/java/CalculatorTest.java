@@ -40,4 +40,9 @@ public class CalculatorTest {
     public void shouldTestWhenDelimiterIsOtherNewLineAndComma() {
         calculator.add("1\n2,/3");
     }
+
+    @Test
+    public void shouldAcceptDifferentDelimiters() {
+        Assert.assertEquals(3, calculator.add("//;\n1;2"));
+    }
 }
