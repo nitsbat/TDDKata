@@ -45,4 +45,19 @@ public class CalculatorTest {
     public void shouldAcceptDifferentDelimiters() {
         Assert.assertEquals(3, calculator.add("//;\n1;2"));
     }
+
+    @Test(expected = RuntimeException.class)
+    public void shouldThrowExceptionOnNegativeNumbers() {
+        calculator.add("-1,-2,5");
+    }
+
+    @Test
+    public void shouldThrowExceptionWithMessageOnNegativeNumbers() {
+        try {
+            calculator.add("-1,-2,5");
+        } catch (Exception ex) {
+            Assert.assertEquals("Negatives Not Allowed", ex.getMessage());
+        }
+
+    }
 }

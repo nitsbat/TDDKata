@@ -16,11 +16,22 @@ public class Calculator {
         int sum;
         try {
             String[] numbers = generateNumbers(input);
+            if (areNegativeNumbersPresent(numbers))
+                throw new RuntimeException("Negatives Not Allowed");
             sum = getSumOfNumbers(numbers);
         } catch (Exception exception) {
             throw exception;
         }
         return sum;
+    }
+
+    private boolean areNegativeNumbersPresent(String[] numbers) {
+
+        for (String number : numbers) {
+            if (Integer.parseInt(number) < 0)
+                return true;
+        }
+        return false;
     }
 
     private int getSumOfNumbers(String[] numbers) {
